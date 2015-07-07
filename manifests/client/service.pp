@@ -31,6 +31,23 @@ class sensu::client::service (
       }
     }
 
+    if $::osfamily == 'windows' {
+
+      file { 'C:/opt/sensu/bin/sensu-client.xml':
+        ensure  => present,
+        content => template("${module_name}/sensu-client.erb"),
+      }
+
+      exec { 'install-sensu-client':
+        command => 'sc.exe create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"',
+        unless  => 'sc.exe query "sensu-client"',
+        path    => 'C:\Windows\System32',
+        before  => Service['sensu-client'],
+        require => File['C:/opt/sensu/bin/sensu-client.xml'],
+      }
+
+    }
+
     service { 'sensu-client':
       ensure     => $ensure,
       enable     => $enable,
