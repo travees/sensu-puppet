@@ -48,9 +48,15 @@ class sensu::package {
       $pkg_source = "C:\\Windows\\Temp\\sensu-${pkg_version}.msi"
       $pkg_require = "Remote_file[${pkg_source}]"
 
+      if $::sensu::repo_source {
+        $repo_source = $::sensu::repo_source
+      } else {
+        $repo_source = 'http://repositories.sensuapp.org/msi'
+      }
+
       remote_file { $pkg_source:
         ensure   => present,
-        source   => "http://repositories.sensuapp.org/msi/sensu-${pkg_version}.msi",
+        source   => "${repo_source}/sensu-${pkg_version}.msi",
         checksum => $::sensu::package_checksum,
       }
     }
