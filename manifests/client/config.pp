@@ -21,7 +21,9 @@ class sensu::client::config {
     mode   => $sensu::file_mode,
   }
 
-  sensu_client_config { $::fqdn:
+  $client_name = downcase($::fqdn)
+
+  sensu_client_config { $client_name:
     ensure        => $ensure,
     base_path     => $sensu::conf_dir,
     client_name   => $sensu::client_name,
