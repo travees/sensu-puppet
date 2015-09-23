@@ -313,6 +313,7 @@
 
 
 class sensu (
+<<<<<<< 5eb0ef8e5eb2f44bbe4aece1a1012c1e5b306e61
   $version                        = 'latest',
   $sensu_plugin_name              = 'sensu-plugin',
   $sensu_plugin_provider          = undef,
