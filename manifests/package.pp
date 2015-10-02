@@ -31,7 +31,7 @@ class sensu::package {
       $pkg_title = 'sensu'
       $pkg_name = 'sensu'
       $pkg_source = undef
-
+      
       if $sensu::manage_repo {
         class { '::sensu::repo::yum': }
       }
@@ -53,7 +53,7 @@ class sensu::package {
       } else {
         $repo_source = 'http://repositories.sensuapp.org/msi'
       }
-
+      
       remote_file { $pkg_source:
         ensure   => present,
         source   => "${repo_source}/sensu-${pkg_version}.msi",
