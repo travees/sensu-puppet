@@ -38,7 +38,7 @@ class sensu::client::service (
         content => template("${module_name}/sensu-client.erb"),
       }
 
-      $startup_type = $::os_major_version ? {
+      $startup_type = $::os_maj_version ? {
         '2003'  => 'Automatic',
         default => 'Delayed-Auto',
       }
