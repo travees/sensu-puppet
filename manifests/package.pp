@@ -47,7 +47,7 @@ class sensu::package {
       $pkg_name = 'Sensu'
       $pkg_source = "C:\\Windows\\Temp\\sensu-${pkg_version}.msi"
       $pkg_require = "Remote_file[${pkg_source}]"
-
+      
       if $::sensu::repo_source {
         $repo_source = $::sensu::repo_source
       } else {
