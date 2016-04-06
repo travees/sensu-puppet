@@ -31,7 +31,7 @@ class sensu::package {
       $pkg_title = 'sensu'
       $pkg_name = 'sensu'
       $pkg_source = undef
-      
+ 
       if $sensu::manage_repo {
         class { '::sensu::repo::yum': }
       }

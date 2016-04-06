@@ -313,7 +313,6 @@
 
 
 class sensu (
-<<<<<<< 5eb0ef8e5eb2f44bbe4aece1a1012c1e5b306e61
   $version                        = 'latest',
   $sensu_plugin_name              = 'sensu-plugin',
   $sensu_plugin_provider          = undef,
@@ -508,26 +507,6 @@ class sensu (
       $group = 'sensu'
       $dir_mode = '0555'
       $file_mode = '0440'
-    }
-
-    'windows': {
-      $etc_dir = 'C:/opt/sensu'
-      $conf_dir = "${etc_dir}/conf.d"
-      $user = undef
-      $group = undef
-      $dir_mode = undef
-      $file_mode = undef
-    }
-  }
-
-  case $::osfamily {
-    'Debian','RedHat': {
-      $etc_dir = '/etc/sensu'
-      $conf_dir = "${etc_dir}/conf.d"
-      $user = 'sensu'
-      $group = 'sensu'
-      $dir_mode = '0555'
-      $file_mode = '0444'
     }
 
     'windows': {
