@@ -17,7 +17,7 @@ class sensu::enterprise::dashboard::config {
     $ensure = undef
   }
 
-  if $ensure != undef {
+  if $::osfamily != 'windows' and $ensure != undef {
     if $ensure == 'present' {
       $_ensure = 'file'
     } else {
