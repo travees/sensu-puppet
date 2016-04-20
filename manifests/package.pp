@@ -31,7 +31,7 @@ class sensu::package {
       $pkg_title = 'sensu'
       $pkg_name = 'sensu'
       $pkg_source = undef
- 
+
       if $sensu::manage_repo {
         class { '::sensu::repo::yum': }
       }
@@ -47,13 +47,13 @@ class sensu::package {
       $pkg_name = 'Sensu'
       $pkg_source = "C:\\Windows\\Temp\\sensu-${pkg_version}.msi"
       $pkg_require = "Remote_file[${pkg_source}]"
-      
+
       if $::sensu::repo_source {
         $repo_source = $::sensu::repo_source
       } else {
         $repo_source = 'http://repositories.sensuapp.org/msi'
       }
-      
+
       remote_file { $pkg_source:
         ensure   => present,
         source   => "${repo_source}/sensu-${pkg_version}.msi",
@@ -101,7 +101,7 @@ class sensu::package {
       owner   => '0',
       group   => '0',
       mode    => '0444',
-      require => Package['sensu'],
+      require => Package[$pkg_title],
     }
   }
 
@@ -113,7 +113,7 @@ class sensu::package {
     purge   => $sensu::_purge_config,
     recurse => true,
     force   => true,
-    require => Package[$pkg_name],
+    require => Package[$pkg_title],
   }
 
   if $sensu::manage_handlers_dir {
@@ -125,7 +125,7 @@ class sensu::package {
       purge   => $sensu::_purge_handlers,
       recurse => true,
       force   => true,
-      require => Package[$pkg_name],
+      require => Package[$pkg_title],
     }
   }
 
@@ -137,7 +137,7 @@ class sensu::package {
     purge   => $sensu::_purge_extensions,
     recurse => true,
     force   => true,
-    require => Package[$pkg_name],
+    require => Package[$pkg_title],
   }
 
   if $sensu::manage_mutators_dir {
@@ -149,7 +149,7 @@ class sensu::package {
       purge   => $sensu::_purge_mutators,
       recurse => true,
       force   => true,
-      require => Package[$pkg_name],
+      require => Package[$pkg_title],
     }
   }
 
@@ -162,7 +162,7 @@ class sensu::package {
       purge   => $sensu::_purge_plugins,
       recurse => true,
       force   => true,
-      require => Package[$pkg_name],
+      require => Package[$pkg_title],
     }
   }
 
